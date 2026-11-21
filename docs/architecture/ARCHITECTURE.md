@@ -4,7 +4,7 @@ SQL metadata is the authority for ownership, document status and versions. Vecto
 
 ```mermaid
 flowchart LR
-  Browser[Next.js browser] --> API[FastAPI bearer auth]
+  Browser[Next.js browser] --> API[FastAPI session cookie + CSRF]
   API --> SQL[(SQLite local / PostgreSQL hosted)]
   API --> Objects[(Local files / Supabase Storage)]
   SQL --> Jobs[Durable leased ingestion jobs]
@@ -25,7 +25,7 @@ sequenceDiagram
   participant S as SQL
   participant R as Retrieval
   participant L as LLM
-  U->>A: Bearer token + question
+  U->>A: Session cookie + CSRF header + question
   A->>S: Membership, workspace, document ACL and ready version
   S-->>A: Authorized chunk set
   A->>R: Query + authorized chunks
