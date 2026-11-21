@@ -36,4 +36,4 @@ sequenceDiagram
   A-->>U: Answer, citations, telemetry
 ```
 
-Keep one API process for local embedded Qdrant. SQL jobs survive API restarts; the bounded worker can be invoked again after its lease expires. Free hosting has no persistent worker guarantee. See INGESTION_PIPELINE.md.
+Keep one API process for local embedded Qdrant. SQL jobs survive API restarts; the bounded worker can be invoked again after its lease expires. Free hosting has no persistent worker guarantee. See [INGESTION_PIPELINE.md](INGESTION_PIPELINE.md).

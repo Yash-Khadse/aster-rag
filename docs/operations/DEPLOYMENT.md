@@ -12,7 +12,7 @@ flowchart LR
   Render --> LLM[Explicit free inference provider]
 ```
 
-1. Run all checks in TESTING.md. Push the tested source and lockfiles to your repository.
+1. Run all checks in [TESTING.md](../quality/TESTING.md). Push the tested source and lockfiles to your repository.
 2. Create a Supabase project within free limits. Create a **private** `documents` bucket. Use the backend service credential only on the API host. Set a PostgreSQL SQLAlchemy URL with `postgresql+psycopg://` and the provider's required TLS/pooler settings.
 3. Create a Pinecone dense cosine index matching `EMBEDDING_DIMENSION` (384 for the default BGE-small model). Use the currently eligible Starter region; verify limits in the console. Do not mix models in one index.
 4. Import `infra/deployment/render.yaml` as a Render Blueprint. It creates two services from one image: `aster-rag-api` (web, free plan) and `aster-rag-worker` (background worker, paid plan because Render's free tier has no background workers). Supply each `sync: false` secret on both services. Set `ENVIRONMENT=hosted`, `STORAGE_BACKEND=supabase`, `VECTOR_BACKEND=pinecone`, an explicit `LLM_MODEL`, `GROQ_API_KEY`, and the final allowed frontend `CORS_ORIGINS`. Backend startup rejects ephemeral hosted persistence configurations.
