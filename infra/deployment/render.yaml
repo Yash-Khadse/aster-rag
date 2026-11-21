@@ -1,0 +1,70 @@
+# Import as a Blueprint with this file path; configure secrets before deploying.
+# Shared settings are a YAML anchor so the web and worker services stay in sync.
+services:
+  - type: web
+    name: aster-rag-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./infra/docker/Dockerfile.api
+    dockerContext: .
+    # preDeployCommand is not available on the free plan, so migrations run before uvicorn starts.
+    dockerCommand: sh -c "alembic -c apps/api/alembic.ini upgrade head && uvicorn rag_api.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips ${FORWARDED_ALLOW_IPS:-127.0.0.1}"
+    healthCheckPath: /api/v1/health
+    autoDeployTrigger: checksPass
+    envVars: &shared_env
+      - key: ENVIRONMENT
+        value: hosted
+      - key: STORAGE_BACKEND
+        value: supabase
+      - key: VECTOR_BACKEND
+        value: pinecone
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: WEB_URL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: LLM_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false
+      - key: REGISTRATION_ENABLED
+        value: false
+      - key: DEMO_ENABLED
+        value: false
+      - key: FORWARDED_ALLOW_IPS
+        value: 127.0.0.1
+  # Ingestion worker: polls the durable job queue. Same image and environment as the API.
+  # Its JWT_SECRET is never used to issue tokens, so its generated value is harmless.
+  - type: worker
+    name: aster-rag-worker
+    runtime: docker
+    # Background workers are not available on the free plan; this is a paid instance.
+    plan: starter
+    dockerfilePath: ./infra/docker/Dockerfile.api
+    dockerContext: .
+    dockerCommand: python -m rag_api.worker
+    autoDeployTrigger: checksPass
+    envVars: *shared_env

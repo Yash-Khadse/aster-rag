@@ -1,0 +1,21 @@
+name: Backend quality
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    env:
+      DEEPEVAL_TELEMETRY_OPT_OUT: 'YES'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra evaluation
+      - run: uv run ruff check apps/api services tests
+      - run: uv run ruff format --check apps/api services tests
+      - run: uv run mypy apps/api/rag_api --ignore-missing-imports --follow-imports=silent
+      - run: uv run pytest tests/backend -q
+      - run: uv export --no-dev --no-emit-project --format requirements-txt > requirements-audit.txt
+      - run: uv run pip-audit -r requirements-audit.txt --disable-pip

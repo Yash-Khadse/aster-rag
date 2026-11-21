@@ -1,0 +1,50 @@
+name: Opt-in semantic benchmark and local judge
+on:
+  workflow_dispatch:
+    inputs:
+      judge:
+        description: Run local Ollama judge (slower)
+        type: boolean
+        default: false
+  schedule:
+    - cron: '0 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_SCHEDULED_BENCHMARK == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DEEPEVAL_TELEMETRY_OPT_OUT: 'YES'
+      EMBEDDING_PROVIDER: fastembed
+      RERANKER_PROVIDER: fastembed
+      RERANKER_TIMEOUT_SECONDS: '120'
+      QDRANT_PATH: ':memory:'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra evaluation
+      - name: Retrieval benchmark
+        run: uv run python -m services.evaluation.benchmark --output datasets/results/semantic.json --min-recall 0.6
+      - name: Start local judge
+        if: inputs.judge == true
+        run: |
+          docker run -d --name ollama -p 11434:11434 ollama/ollama:0.12.3
+          for i in $(seq 1 30); do curl -sf http://localhost:11434/api/tags && break || sleep 2; done
+          docker exec ollama ollama pull qwen2.5:3b
+      - name: DeepEval judge
+        if: inputs.judge == true
+        env:
+          EVAL_JUDGE_MODEL: qwen2.5:3b
+          LLM_PROVIDER: ollama
+          LLM_MODEL: qwen2.5:3b
+          OLLAMA_BASE_URL: http://localhost:11434/v1
+        run: uv run python -m services.evaluation.benchmark --strategies rerank --judge --output datasets/results/judge.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: measured-semantic-benchmark
+          path: datasets/results/*.json

@@ -1,0 +1,22 @@
+name: RAG deterministic quality
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  rag:
+    runs-on: ubuntu-latest
+    env:
+      DEEPEVAL_TELEMETRY_OPT_OUT: 'YES'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra evaluation
+      - run: uv run pytest tests/rag tests/evaluation -q
+      - run: uv run python -m services.evaluation.benchmark --strategies bm25 --output datasets/results/ci-bm25.json --min-recall 0.6
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: measured-bm25
+          path: datasets/results/*.json

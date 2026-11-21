@@ -1,0 +1,533 @@
+{
+  "id": "32a03f15-ae35-4447-93b6-14e27ce87d21",
+  "created_at": "2026-11-21T17:40:05.633616+00:00",
+  "status": "completed",
+  "dataset_version": "aster-1.0",
+  "dataset_sha256": "28cf7426818528d13321b4f1068532665ff29eed2a26bfcdc3759981411969d0",
+  "python": "3.12.13",
+  "top_k": 5,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker_model": "Xenova/ms-marco-MiniLM-L-6-v2",
+  "embedding_provider": "fastembed",
+  "semantic_benchmark": true,
+  "limits": {
+    "n_docs": 12,
+    "n_visible_docs": 10,
+    "n_questions": 24,
+    "chunked": false
+  },
+  "variants": [
+    {
+      "strategy": "bm25",
+      "rerank": false,
+      "status": "completed",
+      "metrics": {
+        "recall": 0.95,
+        "precision": 0.21000000000000002,
+        "mrr": 0.925,
+        "ndcg": 0.9315464876785728,
+        "hit_rate": 0.95
+      },
+      "latency_ms": {
+        "p50": 0.8453999180346727,
+        "p95": 1.4850003644824028
+      },
+      "cases": [
+        {
+          "id": "q01",
+          "category": "factual",
+          "status": "completed",
+          "retrieved": [
+            "leave",
+            "security",
+            "retention",
+            "expenses",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 1.8879999406635761
+        },
+        {
+          "id": "q02",
+          "category": "paraphrase",
+          "status": "completed",
+          "retrieved": [
+            "expenses",
+            "recovery",
+            "retention",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 0.0,
+            "precision": 0.0,
+            "mrr": 0.0,
+            "ndcg": 0.0,
+            "hit_rate": 0.0
+          },
+          "latency_ms": 1.4850003644824028
+        },
+        {
+          "id": "q03",
+          "category": "exact_identifier",
+          "status": "completed",
+          "retrieved": [
+            "api"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.7784999907016754
+        },
+        {
+          "id": "q04",
+          "category": "comparison",
+          "status": "completed",
+          "retrieved": [
+            "security",
+            "onboarding",
+            "architecture",
+            "recovery",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 1.0563996620476246
+        },
+        {
+          "id": "q05",
+          "category": "multi_hop",
+          "status": "completed",
+          "retrieved": [
+            "incident",
+            "recovery",
+            "onboarding",
+            "leave",
+            "architecture"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.4,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.9055999107658863
+        },
+        {
+          "id": "q06",
+          "category": "procedure",
+          "status": "completed",
+          "retrieved": [
+            "incident",
+            "architecture",
+            "injection",
+            "onboarding",
+            "api"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8526002056896687
+        },
+        {
+          "id": "q07",
+          "category": "table_like",
+          "status": "completed",
+          "retrieved": [
+            "retention",
+            "incident",
+            "recovery",
+            "onboarding",
+            "injection"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8286000229418278
+        },
+        {
+          "id": "q08",
+          "category": "conflict",
+          "status": "completed",
+          "retrieved": [
+            "expenses",
+            "recovery",
+            "injection",
+            "architecture",
+            "onboarding"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8934000506997108
+        },
+        {
+          "id": "q09",
+          "category": "unanswerable",
+          "status": "completed",
+          "retrieved": [
+            "recovery",
+            "injection",
+            "architecture",
+            "expenses"
+          ],
+          "metrics": {
+            "recall": null,
+            "precision": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "latency_ms": 0.8010999299585819
+        },
+        {
+          "id": "q10",
+          "category": "authorization",
+          "status": "completed",
+          "retrieved": [
+            "injection",
+            "recovery",
+            "architecture",
+            "expenses"
+          ],
+          "metrics": {
+            "recall": null,
+            "precision": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "latency_ms": 0.8105002343654633
+        },
+        {
+          "id": "q11",
+          "category": "prompt_injection",
+          "status": "completed",
+          "retrieved": [
+            "injection",
+            "onboarding",
+            "incident",
+            "expenses",
+            "api"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.9157001040875912
+        },
+        {
+          "id": "q12",
+          "category": "follow_up",
+          "status": "completed",
+          "retrieved": [
+            "leave",
+            "retention",
+            "security",
+            "onboarding",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.914399977773428
+        },
+        {
+          "id": "q13",
+          "category": "paraphrase",
+          "status": "completed",
+          "retrieved": [
+            "retention",
+            "architecture",
+            "onboarding",
+            "injection",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 0.5,
+            "ndcg": 0.6309297535714575,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8929995819926262
+        },
+        {
+          "id": "q14",
+          "category": "factual",
+          "status": "completed",
+          "retrieved": [
+            "onboarding",
+            "leave",
+            "security",
+            "retention",
+            "expenses"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8581997826695442
+        },
+        {
+          "id": "q15",
+          "category": "exact_identifier",
+          "status": "completed",
+          "retrieved": [
+            "api",
+            "recovery",
+            "architecture",
+            "retention",
+            "incident"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8919998072087765
+        },
+        {
+          "id": "q16",
+          "category": "procedure",
+          "status": "completed",
+          "retrieved": [
+            "retention",
+            "onboarding",
+            "security",
+            "recovery",
+            "architecture"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8299998007714748
+        },
+        {
+          "id": "q17",
+          "category": "comparison",
+          "status": "completed",
+          "retrieved": [
+            "leave",
+            "recovery"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.7046000100672245
+        },
+        {
+          "id": "q18",
+          "category": "multi_hop",
+          "status": "completed",
+          "retrieved": [
+            "security",
+            "onboarding",
+            "recovery",
+            "injection",
+            "expenses"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.4,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8820001967251301
+        },
+        {
+          "id": "q19",
+          "category": "table_like",
+          "status": "completed",
+          "retrieved": [
+            "recovery",
+            "retention",
+            "onboarding",
+            "incident",
+            "injection"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8381996303796768
+        },
+        {
+          "id": "q20",
+          "category": "unanswerable",
+          "status": "completed",
+          "retrieved": [
+            "onboarding",
+            "injection",
+            "incident",
+            "expenses",
+            "api"
+          ],
+          "metrics": {
+            "recall": null,
+            "precision": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "latency_ms": 0.8196001872420311
+        },
+        {
+          "id": "q21",
+          "category": "conflict",
+          "status": "completed",
+          "retrieved": [
+            "expenses",
+            "retention",
+            "incident",
+            "leave",
+            "recovery"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8307001553475857
+        },
+        {
+          "id": "q22",
+          "category": "authorization",
+          "status": "completed",
+          "retrieved": [
+            "injection",
+            "onboarding",
+            "incident",
+            "expenses",
+            "api"
+          ],
+          "metrics": {
+            "recall": null,
+            "precision": null,
+            "mrr": null,
+            "ndcg": null,
+            "hit_rate": null
+          },
+          "latency_ms": 0.8006002753973007
+        },
+        {
+          "id": "q23",
+          "category": "prompt_injection",
+          "status": "completed",
+          "retrieved": [
+            "injection",
+            "architecture",
+            "onboarding",
+            "incident",
+            "expenses"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.8263001218438148
+        },
+        {
+          "id": "q24",
+          "category": "follow_up",
+          "status": "completed",
+          "retrieved": [
+            "incident",
+            "security",
+            "leave",
+            "retention",
+            "onboarding"
+          ],
+          "metrics": {
+            "recall": 1.0,
+            "precision": 0.2,
+            "mrr": 1.0,
+            "ndcg": 1.0,
+            "hit_rate": 1.0
+          },
+          "latency_ms": 0.7863999344408512
+        }
+      ]
+    }
+  ],
+  "judge": {
+    "status": "not_run",
+    "reason": "Judge explicitly opt-in"
+  },
+  "answer_checks": {
+    "q09": {
+      "abstention": "not_run"
+    },
+    "q10": {
+      "abstention": "not_run"
+    },
+    "q11": {
+      "forbidden_answer": "not_run"
+    },
+    "q20": {
+      "abstention": "not_run"
+    },
+    "q22": {
+      "abstention": "not_run"
+    },
+    "q23": {
+      "forbidden_answer": "not_run"
+    }
+  }
+}
