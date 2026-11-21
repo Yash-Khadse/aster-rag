@@ -2,6 +2,60 @@
 
 A fictional enterprise corpus, permission-aware retrieval, BM25 + dense reciprocal-rank fusion, optional cross-encoder reranking, and cited answers through an OpenAI-compatible provider. FastAPI serves a Next.js interface. The default development path uses CPU embeddings, local storage and Ollama without paid APIs.
 
+## Architecture
+
+SQL is the authority for permissions. The API selects the chunks the caller may read (workspace, document ACL, ready and current version) **before** any ranking or model call. The vector index only speeds up similarity search and never grants access.
+
+```mermaid
+flowchart LR
+  subgraph Client
+    Web["Next.js web app"]
+  end
+
+  subgraph API["FastAPI API"]
+    Auth["Auth: HttpOnly session cookie + CSRF<br/>workspace membership and document ACL"]
+    Endpoints["Upload, search and chat endpoints<br/>SSE progress"]
+  end
+
+  subgraph Stores["Storage"]
+    SQL[("SQL metadata, ACLs and job queue<br/>SQLite local / PostgreSQL hosted")]
+    Files[("Source files<br/>local disk / Supabase Storage")]
+    Vec[("Vector index<br/>Qdrant local / Pinecone hosted")]
+  end
+
+  subgraph Ingest["Ingestion worker"]
+    Jobs["Durable leased jobs"] --> Parse["Parse and chunk<br/>PDF, DOCX, MD, TXT, HTML, CSV"]
+    Parse --> Embed["BGE embeddings on CPU"]
+  end
+
+  subgraph Query["Query path"]
+    Authorized["Authorized current chunks"] --> Dense["Dense vector search"]
+    Authorized --> BM25["BM25 lexical search"]
+    Dense --> RRF["Reciprocal rank fusion"]
+    BM25 --> RRF
+    RRF --> Rerank["ONNX cross-encoder<br/>optional"]
+    Rerank --> Evidence["Token-budgeted evidence"]
+  end
+
+  LLM["LLM provider<br/>Ollama / Groq / Gemini / OpenAI"]
+  Validate["Validate citations against evidence<br/>abstain if unsupported"]
+
+  Web --> Auth --> Endpoints
+  Endpoints -- "store file, enqueue job" --> Files
+  Endpoints --> SQL
+  SQL --> Jobs
+  Files --> Parse
+  Embed --> Vec
+  Embed -- "chunk manifest" --> SQL
+
+  Endpoints -- "question" --> Authorized
+  SQL -- "ACL, version, index signature" --> Authorized
+  Vec --> Dense
+  Evidence --> LLM --> Validate --> Endpoints
+```
+
+More detail: [architecture docs](docs/architecture/ARCHITECTURE.md), [hybrid retrieval](docs/architecture/HYBRID_RETRIEVAL.md) and [ingestion pipeline](docs/architecture/INGESTION_PIPELINE.md).
+
 ## Start on Windows
 
 Install Python 3.12, uv, Node.js 22 LTS and Ollama. Run `./scripts/check-environment.ps1`, then `./scripts/setup.ps1`. Copy `.env.example` to `.env` if not already created. Run `ollama pull qwen2.5:3b`.
