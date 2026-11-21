@@ -121,7 +121,7 @@ return <div className="chat-layout">
           </button>)}
         </div>
       </div> : messages.map((message, index) => <article key={message.id || index} className={`message ${message.role}`}>
-        <div className="message-label">{message.role === 'user' ? 'You' : 'Atlas'}</div>
+        <div className="message-label">{message.role === 'user' ? 'You' : 'Aster'}</div>
         <div className="message-body"><CitationText text={message.content} citations={message.citations ?? []}
           onSelect={source => showSources(message.citations ?? [], source)} /></div>
         {!!message.citations?.length && <button className="text-button" onClick={() => showSources(message.citations ?? [])}>
@@ -156,7 +156,7 @@ return <div className="chat-layout">
           </div>
         </div>
       </form>
-      <p className="composer-note">Atlas can miss context. Check the source before acting on an answer.</p>
+      <p className="composer-note">Aster can miss context. Check the source before acting on an answer.</p>
     </div>
   </section>
   <aside className="evidence-panel evidence-desktop" aria-label="Answer sources">

@@ -1,6 +1,6 @@
 # API reference
 
-The running server's `/docs` and `/openapi.json` are the authoritative schemas. Prefix application endpoints with `/api/v1`; list endpoints return JSON arrays. Authenticate with `Authorization: Bearer <access_token>`, or with the HttpOnly `atlas_session` cookie set by login/register/demo/verify-email. Cookie-authenticated POST/PUT/PATCH/DELETE requests must send `X-CSRF-Token` (the `csrf_token` returned in the auth response, or by `GET /auth/me` when cookie-authenticated); Bearer requests need no CSRF header. Hosted cookies are `SameSite=None; Secure`, which cross-domain frontends may lose to ITP/third-party-cookie blocking; prefer one parent domain.
+The running server's `/docs` and `/openapi.json` are the authoritative schemas. Prefix application endpoints with `/api/v1`; list endpoints return JSON arrays. Authenticate with `Authorization: Bearer <access_token>`, or with the HttpOnly `aster_session` cookie set by login/register/demo/verify-email. Cookie-authenticated POST/PUT/PATCH/DELETE requests must send `X-CSRF-Token` (the `csrf_token` returned in the auth response, or by `GET /auth/me` when cookie-authenticated); Bearer requests need no CSRF header. Hosted cookies are `SameSite=None; Secure`, which cross-domain frontends may lose to ITP/third-party-cookie blocking; prefer one parent domain.
 
 | Method/path | Purpose |
 |---|---|

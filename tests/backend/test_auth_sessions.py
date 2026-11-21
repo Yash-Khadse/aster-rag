@@ -63,7 +63,7 @@ def test_verification_flow(verified):
         assert token not in (row.email_verification_token_hash or "")
     done = client.post("/api/v1/auth/verify-email", json={"token": token})
     assert done.status_code == 200 and done.json()["access_token"] and done.json()["csrf_token"]
-    assert "atlas_session" in done.headers["set-cookie"]
+    assert "aster_session" in done.headers["set-cookie"]
     assert client.post("/api/v1/auth/verify-email", json={"token": token}).status_code == 400  # single use
     assert client.post("/api/v1/auth/login", json=creds).status_code == 200
 
@@ -141,7 +141,7 @@ def test_unverified_mode_off_keeps_session_response(plain):
     response = signup(client)
     assert response.status_code == 200 and response.json()["access_token"]
     cookie = response.headers["set-cookie"]
-    assert "atlas_session=" in cookie and "HttpOnly" in cookie and "Path=/" in cookie
+    assert "aster_session=" in cookie and "HttpOnly" in cookie and "Path=/" in cookie
     assert "Max-Age=7200" in cookie and "SameSite=lax" in cookie and "Secure" not in cookie
 
 
@@ -172,9 +172,9 @@ def test_cookie_requires_csrf_but_bearer_does_not(plain):
 def test_logout_clears_cookie_and_old_cookie_is_rejected(plain):
     client, _ = plain
     body = signup(client).json()
-    old = client.cookies.get("atlas_session")
+    old = client.cookies.get("aster_session")
     out = client.post("/api/v1/auth/logout", headers={"X-CSRF-Token": body["csrf_token"]})
     assert out.status_code == 200 and "Max-Age=0" in out.headers["set-cookie"]
     client.cookies.clear()
-    client.cookies.set("atlas_session", old)
+    client.cookies.set("aster_session", old)
     assert client.get("/api/v1/auth/me").status_code == 401

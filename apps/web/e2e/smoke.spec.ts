@@ -6,14 +6,14 @@ test('sign in is accessible at desktop and mobile sizes', async ({ page }) => {
     headers: { 'access-control-allow-origin': route.request().headers().origin ?? 'http://localhost:3000', 'access-control-allow-credentials': 'true' },
   }));
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Sign in to Atlas' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Sign in to Aster' })).toBeVisible();
   await expect(page.getByLabel('Email address')).toBeVisible();
-  await page.screenshot({ path: 'test-results/atlas-sign-in.png' });
+  await page.screenshot({ path: 'test-results/aster-sign-in.png' });
   await page.setViewportSize({ width: 375, height: 812 });
   await expect(page.getByRole('button', { name: 'Explore demo workspace' })).toBeVisible();
   await expect(page.getByText('Example workspace')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await page.screenshot({ path: 'test-results/atlas-mobile-sign-in.png', fullPage: true });
+  await page.screenshot({ path: 'test-results/aster-mobile-sign-in.png', fullPage: true });
 });
 
 test('workspace navigation and inline sources work at desktop and phone sizes', async ({ page }) => {
@@ -38,7 +38,7 @@ test('workspace navigation and inline sources work at desktop and phone sizes', 
   });
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'What would you like to find?' })).toBeVisible();
-  await page.screenshot({ path: 'test-results/atlas-desktop.png' });
+  await page.screenshot({ path: 'test-results/aster-desktop.png' });
   await page.getByRole('button', { name: 'What is the organization’s leave policy?' }).click();
   await expect(page.getByRole('textbox', { name: 'Ask a question' })).toBeFocused();
   await page.getByRole('button', { name: 'Send question' }).click();
@@ -51,7 +51,7 @@ test('workspace navigation and inline sources work at desktop and phone sizes', 
   await citation.click();
   const drawer = page.getByRole('dialog', { name: 'Answer sources' });
   await expect(drawer.getByText('Example approval steps.')).toBeVisible();
-  await page.screenshot({ path: 'test-results/atlas-mobile-sources.png' });
+  await page.screenshot({ path: 'test-results/aster-mobile-sources.png' });
   await page.keyboard.press('Escape');
   await expect(drawer).toBeHidden();
   await page.getByRole('button', { name: 'Open navigation' }).click();

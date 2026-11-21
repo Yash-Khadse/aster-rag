@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-export const metadata: Metadata = {title:'Atlas · Enterprise knowledge',description:'Answers grounded in your organization’s knowledge.'};
+export const metadata: Metadata = {title:'Aster · Enterprise knowledge',description:'Answers grounded in your organization’s knowledge.'};
 
 // This is fixed, authored markup for the design record. It contains no runtime or user content.
 const designRecord = `<!--

@@ -1,1 +1,1 @@
-"""Enterprise RAG HTTP service."""
+"""Aster HTTP API service."""

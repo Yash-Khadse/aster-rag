@@ -16,7 +16,7 @@ import { ErrorNotice, Loading } from '@/components/ui';
 import { SourceDialog } from '@/components/source-dialog';
 
 const navigation = [
-  { id: 'chat', name: 'Ask Atlas', icon: MessageSquare },
+  { id: 'chat', name: 'Ask Aster', icon: MessageSquare },
   { id: 'library', name: 'Knowledge library', icon: BookOpen },
   { id: 'search', name: 'Search explorer', icon: Search },
   { id: 'evaluations', name: 'Evaluation studio', icon: ChartNoAxesCombined },
@@ -97,8 +97,8 @@ export default function Home() {
   function sidebar(mobile: boolean) {
     return <>
       <div className="sidebar-top">
-        <a href="#chat" className="brand" onClick={() => navigate('chat')} aria-label="Atlas workspace">
-          <span className="brand-symbol" aria-hidden="true">A</span><span>Atlas</span>
+        <a href="#chat" className="brand" onClick={() => navigate('chat')} aria-label="Aster workspace">
+          <span className="brand-symbol" aria-hidden="true">A</span><span>Aster</span>
         </a>
         {mobile && <button className="icon-button" aria-label="Close navigation" onClick={closeMenu}><X size={20} /></button>}
       </div>

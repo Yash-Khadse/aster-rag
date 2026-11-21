@@ -47,4 +47,4 @@ Cloud deployment remains incomplete until credentials/resources are supplied and
 
 ## Cookie sessions across domains
 
-Browser sessions use an HttpOnly `atlas_session` cookie. When hosted the cookie is `SameSite=None; Secure`, which is what a frontend and API on different registrable domains (for example `*.vercel.app` and `*.onrender.com`) require. Safari/Firefox ITP and third-party-cookie blocking may drop such cookies, so sign-in can silently fail there. Serve both under one parent domain (for example `app.example.com` and `api.example.com`); bearer-token API clients are unaffected.
+Browser sessions use an HttpOnly `aster_session` cookie. When hosted the cookie is `SameSite=None; Secure`, which is what a frontend and API on different registrable domains (for example `*.vercel.app` and `*.onrender.com`) require. Safari/Firefox ITP and third-party-cookie blocking may drop such cookies, so sign-in can silently fail there. Serve both under one parent domain (for example `app.example.com` and `api.example.com`); bearer-token API clients are unaffected.

@@ -1,5 +1,5 @@
 ---
-name: Atlas
+name: Aster
 description: "An editorial workspace for answers and their sources."
 colors:
   ink: "#17243b"
@@ -108,13 +108,13 @@ components:
     padding: "1px 5px"
 ---
 
-# Design System: Atlas
+# Design System: Aster
 
 ## Overview
 
 **Creative North Star: "The Editorial Reference Desk"**
 
-Atlas treats an answer as a passage the reader can verify. Warm paper and light rails hold the reading surface and its source index together. Numbered marks in the answer let the reader move directly to the supporting excerpt.
+Aster treats an answer as a passage the reader can verify. Warm paper and light rails hold the reading surface and its source index together. Numbered marks in the answer let the reader move directly to the supporting excerpt.
 
 Serif headings give the larger reading surfaces a clear entry point. Sans-serif controls and ruled rows keep navigation, forms, and workspace records easy to scan.
 

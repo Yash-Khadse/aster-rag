@@ -36,7 +36,7 @@ export function Auth({ onLogin }: { onLogin: (user: User) => void }) {
       } else if (error instanceof ApiError && error.status === 403 && error.message === 'email_not_verified') {
         setVerify({ email: body?.email ?? '' });
       } else {
-        setError(error instanceof Error ? error.message : 'Could not connect to Atlas.');
+        setError(error instanceof Error ? error.message : 'Could not connect to Aster.');
       }
     } finally {
       pending.current = false;
@@ -63,7 +63,7 @@ export function Auth({ onLogin }: { onLogin: (user: User) => void }) {
       await api('/auth/resend-verification', { method: 'POST', body: JSON.stringify({ email: new FormData(event.currentTarget).get('email') }) });
       setResent(true);
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Could not connect to Atlas.');
+      setError(error instanceof Error ? error.message : 'Could not connect to Aster.');
     } finally {
       setBusy(false);
     }
@@ -76,8 +76,8 @@ export function Auth({ onLogin }: { onLogin: (user: User) => void }) {
 
   return (
     <main className="auth">
-      <section className="auth-story" aria-label="About Atlas">
-        <Link className="brand" href="/" aria-label="Atlas home"><span className="brand-symbol" aria-hidden="true">A</span><span>Atlas</span></Link>
+      <section className="auth-story" aria-label="About Aster">
+        <Link className="brand" href="/" aria-label="Aster home"><span className="brand-symbol" aria-hidden="true">A</span><span>Aster</span></Link>
         <div className="auth-story-body">
           <h1>Find the answer.<br />Follow the source.</h1>
           <p>Search your organization’s documents and read the evidence behind every answer.</p>
@@ -92,7 +92,7 @@ export function Auth({ onLogin }: { onLogin: (user: User) => void }) {
       </section>
       <section className="auth-form" aria-labelledby="sign-in-title">
         <div className="auth-form-inner">
-          <h2 id="sign-in-title">{verify ? 'Check your email to verify your account' : register ? 'Create your workspace' : 'Sign in to Atlas'}</h2>
+          <h2 id="sign-in-title">{verify ? 'Check your email to verify your account' : register ? 'Create your workspace' : 'Sign in to Aster'}</h2>
           <p>{verify ? 'We sent a verification link. Open it to finish signing in.' : register ? 'Set up a workspace for your organization.' : 'Continue to your organization’s knowledge base.'}</p>
           {error && <ErrorNotice message={error} />}
           {verify ? <>

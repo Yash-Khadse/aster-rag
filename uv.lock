@@ -212,6 +212,84 @@ wheels = [
 ]
 
 [[package]]
+name = "aster-rag"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "alembic" },
+    { name = "beautifulsoup4" },
+    { name = "fastapi" },
+    { name = "fastembed" },
+    { name = "httpx" },
+    { name = "langchain-core" },
+    { name = "langchain-openai" },
+    { name = "langchain-text-splitters" },
+    { name = "pinecone" },
+    { name = "psycopg", extra = ["binary"] },
+    { name = "pwdlib", extra = ["argon2"] },
+    { name = "pydantic-settings" },
+    { name = "pyjwt" },
+    { name = "pypdf" },
+    { name = "python-docx" },
+    { name = "python-multipart" },
+    { name = "qdrant-client" },
+    { name = "rank-bm25" },
+    { name = "sqlalchemy" },
+    { name = "uvicorn", extra = ["standard"] },
+]
+
+[package.optional-dependencies]
+evaluation = [
+    { name = "deepeval" },
+]
+reranking = [
+    { name = "sentence-transformers" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "pip-audit" },
+    { name = "pytest" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "alembic", specifier = ">=1.14,<2" },
+    { name = "beautifulsoup4", specifier = ">=4.12,<5" },
+    { name = "deepeval", marker = "extra == 'evaluation'", specifier = ">=3,<5" },
+    { name = "fastapi", specifier = ">=0.115,<1" },
+    { name = "fastembed", specifier = ">=0.6,<1" },
+    { name = "httpx", specifier = ">=0.28,<1" },
+    { name = "langchain-core", specifier = ">=0.3,<2" },
+    { name = "langchain-openai", specifier = ">=0.3,<2" },
+    { name = "langchain-text-splitters", specifier = ">=0.3,<2" },
+    { name = "pinecone", specifier = ">=6,<9" },
+    { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<4" },
+    { name = "pwdlib", extras = ["argon2"], specifier = ">=0.2,<1" },
+    { name = "pydantic-settings", specifier = ">=2.7,<3" },
+    { name = "pyjwt", specifier = ">=2.10,<3" },
+    { name = "pypdf", specifier = ">=5,<7" },
+    { name = "python-docx", specifier = ">=1.1,<2" },
+    { name = "python-multipart", specifier = ">=0.0.20" },
+    { name = "qdrant-client", specifier = ">=1.13,<2" },
+    { name = "rank-bm25", specifier = ">=0.2.2,<1" },
+    { name = "sentence-transformers", marker = "extra == 'reranking'", specifier = ">=3.4,<6" },
+    { name = "sqlalchemy", specifier = ">=2.0,<3" },
+    { name = "uvicorn", extras = ["standard"], specifier = ">=0.34,<1" },
+]
+provides-extras = ["reranking", "evaluation"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.15" },
+    { name = "pip-audit", specifier = ">=2.8" },
+    { name = "pytest", specifier = ">=8,<10" },
+    { name = "ruff", specifier = ">=0.9" },
+]
+
+[[package]]
 name = "attrs"
 version = "26.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -546,84 +624,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/fc/f8/98eea607f65de6527f8a2e8885fc8015d3e6f5775df186e443e0964a11c3/distro-1.9.0.tar.gz", hash = "sha256:2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed", size = 60722, upload-time = "2023-12-24T09:54:32.31Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/12/b3/231ffd4ab1fc9d679809f356cebee130ac7daa00d6d6f3206dd4fd137e9e/distro-1.9.0-py3-none-any.whl", hash = "sha256:7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2", size = 20277, upload-time = "2023-12-24T09:54:30.421Z" },
-]
-
-[[package]]
-name = "enterprise-rag"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "alembic" },
-    { name = "beautifulsoup4" },
-    { name = "fastapi" },
-    { name = "fastembed" },
-    { name = "httpx" },
-    { name = "langchain-core" },
-    { name = "langchain-openai" },
-    { name = "langchain-text-splitters" },
-    { name = "pinecone" },
-    { name = "psycopg", extra = ["binary"] },
-    { name = "pwdlib", extra = ["argon2"] },
-    { name = "pydantic-settings" },
-    { name = "pyjwt" },
-    { name = "pypdf" },
-    { name = "python-docx" },
-    { name = "python-multipart" },
-    { name = "qdrant-client" },
-    { name = "rank-bm25" },
-    { name = "sqlalchemy" },
-    { name = "uvicorn", extra = ["standard"] },
-]
-
-[package.optional-dependencies]
-evaluation = [
-    { name = "deepeval" },
-]
-reranking = [
-    { name = "sentence-transformers" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "mypy" },
-    { name = "pip-audit" },
-    { name = "pytest" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "alembic", specifier = ">=1.14,<2" },
-    { name = "beautifulsoup4", specifier = ">=4.12,<5" },
-    { name = "deepeval", marker = "extra == 'evaluation'", specifier = ">=3,<5" },
-    { name = "fastapi", specifier = ">=0.115,<1" },
-    { name = "fastembed", specifier = ">=0.6,<1" },
-    { name = "httpx", specifier = ">=0.28,<1" },
-    { name = "langchain-core", specifier = ">=0.3,<2" },
-    { name = "langchain-openai", specifier = ">=0.3,<2" },
-    { name = "langchain-text-splitters", specifier = ">=0.3,<2" },
-    { name = "pinecone", specifier = ">=6,<9" },
-    { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<4" },
-    { name = "pwdlib", extras = ["argon2"], specifier = ">=0.2,<1" },
-    { name = "pydantic-settings", specifier = ">=2.7,<3" },
-    { name = "pyjwt", specifier = ">=2.10,<3" },
-    { name = "pypdf", specifier = ">=5,<7" },
-    { name = "python-docx", specifier = ">=1.1,<2" },
-    { name = "python-multipart", specifier = ">=0.0.20" },
-    { name = "qdrant-client", specifier = ">=1.13,<2" },
-    { name = "rank-bm25", specifier = ">=0.2.2,<1" },
-    { name = "sentence-transformers", marker = "extra == 'reranking'", specifier = ">=3.4,<6" },
-    { name = "sqlalchemy", specifier = ">=2.0,<3" },
-    { name = "uvicorn", extras = ["standard"], specifier = ">=0.34,<1" },
-]
-provides-extras = ["reranking", "evaluation"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "mypy", specifier = ">=1.15" },
-    { name = "pip-audit", specifier = ">=2.8" },
-    { name = "pytest", specifier = ">=8,<10" },
-    { name = "ruff", specifier = ">=0.9" },
 ]
 
 [[package]]

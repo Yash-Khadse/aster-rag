@@ -1,4 +1,4 @@
-# Atlas
+# Aster
 
 <!-- impeccable:product-schema 1 -->
 
@@ -12,7 +12,7 @@ Workspace members look up organizational information and verify answers against 
 
 ## Product Purpose
 
-Atlas answers questions over documents the current user can access. Citations and source details let the reader inspect the basis for an answer. The library supports upload, search, document access, and job status. Search compares retrieval methods, and evaluations report recorded runs.
+Aster answers questions over documents the current user can access. Citations and source details let the reader inspect the basis for an answer. The library supports upload, search, document access, and job status. Search compares retrieval methods, and evaluations report recorded runs.
 
 ## Constraints
 

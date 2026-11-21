@@ -51,7 +51,7 @@ passwords = PasswordHash.recommended()
 # Verified against when the account is unknown/disabled so login timing does not reveal accounts.
 DUMMY_HASH = passwords.hash("not-a-real-password")
 bearer = HTTPBearer(auto_error=False)
-SESSION_COOKIE = "atlas_session"
+SESSION_COOKIE = "aster_session"
 VERIFY_TTL_SECONDS = 24 * 3600
 
 
@@ -173,7 +173,7 @@ def create_app(settings=None, pipeline=None):
             Base.metadata.create_all(engine)
         yield
 
-    app = FastAPI(title="Enterprise RAG", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Aster", version="0.1.0", lifespan=lifespan)
     app.state.sessions = sessions
     app.state.settings = settings
     app.state.storage = storage
